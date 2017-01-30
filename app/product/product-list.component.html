@@ -1,0 +1,38 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    {{pageTitle}}
+  </div>
+  <div class="panel-body">
+    <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp" *ngIf='products && products.length'>
+      <thead>
+        <label for="filter">Filtered by:</label>
+        <input [(ngModel)]='listFilter' id="filter" type="text" class="validate">
+        <tr>
+          <th>
+            <a (click)='toggleImage()' class="waves-effect waves-light btn">{{showImage ? 'Hide' : 'Show'}} image</a>
+          </th>
+          <th>Product</th>
+          <th>Code</th>
+          <th>Available</th>
+          <th>Price</th>
+          <th>5 Star Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let product of products'>
+          <td>
+            <img *ngIf='showImage' [src]='product.imageUrl'
+                 [title]='product.productName'
+                 [style.width.px]='imageWidth'
+                 [style.margin.px]='imageMargin'>
+          </td>
+          <td>{{product.productName}}</td>
+          <td>{{product.productCode | lowercase}}</td>
+          <td>{{product.releaseDate}}</td>
+          <td>{{product.price | currency:'BRL':true:'1.2-2'}}</td>
+          <td>{{product.starRating}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
